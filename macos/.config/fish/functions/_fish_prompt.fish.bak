@@ -1,0 +1,41 @@
+function fish_prompt
+    # Colors
+    set -l color_path (set_color cyan)
+    set -l color_prompt (set_color "#FFB000")
+    set -l color_time (set_color green)
+    set -l color_reset (set_color normal)
+
+    # Git configuration
+    set -l git_part ""
+
+    # Only check if current directory has .git
+    if test -d ".git"
+        # Branch name
+        set -l branch (git rev-parse --abbrev-ref HEAD 2>/dev/null)
+
+        # Check repo state (fast)
+        set -l git_status (git status --porcelain -uno 2>/dev/null)
+
+        if test -n "$git_status"
+            # Repo dirty
+            set git_part ":"(set_color red)"$branch:"(printf \ue2a6)"$color_reset"
+        else
+            # Repo clean
+            set git_part ":"(set_color green)"$branch:"(printf \ueeaf)"$color_reset"
+        end
+    end
+
+    # Last command duration (only show if >= 0.7s)
+    set -l duration ""
+    if test "$CMD_DURATION" -ge 700
+        set duration ":"(set_color green)(math -s1 "$CMD_DURATION / 1000")"s"
+    end
+
+    # Final prompt
+    echo -n -s \
+        $color_path (prompt_pwd) \
+        $duration \
+        $git_part \
+        $color_prompt "❱ " \
+        $color_reset
+end

@@ -1,0 +1,54 @@
+title = ghostty
+theme = Gruvbox Dark
+auto-update = download
+auto-update-channel = stable
+shell-integration = fish
+resize-overlay-position = bottom-right
+
+#Window
+window-decoration = auto
+window-width = 90
+window-height = 30
+window-show-tab-bar = always
+window-new-tab-position = end
+window-inherit-font-size = false
+window-inherit-working-directory = false
+window-colorspace = display-p3
+window-padding-x = 1
+window-padding-y = 1
+window-padding-color = background
+window-padding-balance = true
+window-save-state = never
+window-subtitle = working-directory
+
+#MacOs
+macos-icon = blueprint
+macos-icon-frame = beige
+macos-option-as-alt = false
+macos-titlebar-style = native
+macos-titlebar-proxy-icon = hidden
+
+# Clipboard settings
+clipboard-read = allow
+clipboard-write = allow
+
+#Mouse
+mouse-hide-while-typing = true
+
+#Font
+font-family = "Maple Mono NF Light"
+font-thicken = false
+font-size = 12
+
+#Theme
+cursor-style = bar
+cursor-style-blink = false
+background-blur=true
+
+#Keybinds
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+keybind = cmd+n=unbind
+keybind = global:cmd+grave_accent=new_window
