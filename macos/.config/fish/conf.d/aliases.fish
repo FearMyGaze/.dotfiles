@@ -138,7 +138,7 @@ end
 # Zoxide commands
 #
 
-alias l='zi'
+alias s='zi'
 alias zz='z -'
 alias b='z ..'
 
