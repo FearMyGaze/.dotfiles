@@ -1,0 +1,149 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+    // "vim_mode": true,
+    "icon_theme": "Catppuccin Latte",
+    "telemetry": {
+        "diagnostics": false,
+        "metrics": false
+    },
+    "agent": {
+        // "default_model": {
+        //     "provider": "zed.dev",
+        //     "model": "claude-3-5-sonnet-latest"
+        // }
+        "dock": null,
+        "enabled": false,
+        "version": "2"
+    },
+    "features": {
+        "copilot": false,
+        "edit_prediction_provider": "zed"
+    },
+    "ui_font_size": 13,
+    "buffer_font_size": 11,
+    "buffer_font_family": "Maple Mono NF",
+    "theme": {
+        "mode": "system",
+        "light": "Catppuccin Latte - No Italics",
+        "dark": "Catppuccin Latte - No Italics"
+    },
+    "show_wrap_guides": true,
+    "preferred_line_length": 80,
+    "soft_wrap": "preferred_line_length",
+    "cursor_blink": false,
+    "project_panel": {
+        "show_diagnostics": "all",
+        "scrollbar": { "show": "never" }
+    },
+    "base_keymap": "JetBrains",
+    "show_whitespaces": "all",
+    "indent_guides": {
+        "enabled": true
+    },
+    "current_line_highlight": "all",
+    "tab_size": 4,
+    "preview_tabs": {
+        "enabled": false,
+        "enable_preview_from_code_navigation": false
+    },
+    "tabs": {
+        "close_position": "right",
+        "file_icons": true,
+        "git_status": true,
+        "activate_on_close": "history"
+    },
+    "git": {
+        "git_gutter": "tracked_files",
+        "inline_blame": {
+            "enabled": true
+        }
+    },
+    "autosave": {
+        "after_delay": {
+            "milliseconds": 3000
+        }
+    },
+    "format_on_save": "on",
+    "ensure_final_newline_on_save": true,
+    "terminal": {
+        "alternate_scroll": "off",
+        "copy_on_select": true,
+        "dock": "right",
+        "detect_venv": {
+            "on": {
+                "directories": [".env", "env", ".venv", "venv"],
+                "activate_script": "default"
+            }
+        },
+        "env": {},
+        "font_features": null,
+        "line_height": "comfortable",
+        "option_as_meta": false,
+        "button": true,
+        "toolbar": {
+            "title": true
+        },
+        "working_directory": "current_project_directory"
+    },
+    "lsp": {
+        "gopls": {
+            "initialization_options": {
+                "usePlaceholders": true,
+                "completeUnimported": false,
+                "experimentalPostfixCompletions": true,
+                "hints": {
+                    "assignVariableTypes": false,
+                    "compositeLiteralFields": false,
+                    "compositeLiteralTypes": false,
+                    "constantValues": true,
+                    "functionTypeParameters": true,
+                    "parameterNames": true,
+                    "rangeVariableTypes": true
+                }
+            }
+        }
+    },
+    "languages": {
+        "Markdown": {
+            "preferred_line_length": 80,
+            "format_on_save": "off"
+        },
+        "SQL": {
+            "formatter": "prettier"
+        },
+        "JSON": {
+            "prettier": {
+                "allowed": true,
+                "parser": "json"
+            }
+        },
+        "JavaScript": {
+            "code_actions_on_format": {
+                "source.fixAll.eslint": true
+            }
+        },
+        "Rust": {
+            "use_on_type_format": false
+        },
+        "Go": {
+            "use_on_type_format": true,
+            "preferred_line_length": 180,
+            "format_on_save": "on"
+        },
+        "Fish": {
+            "preferred_line_length": 180,
+            "format_on_save": "on"
+        },
+        "Java": {
+            "preferred_line_length": 180,
+            "format_on_save": "on"
+        }
+    }
+}

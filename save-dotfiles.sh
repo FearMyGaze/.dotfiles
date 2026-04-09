@@ -40,6 +40,8 @@ items=(
     ".bash_profile"
     ".config/doom"
     ".config/ghostty"
+    ".config/yazi"
+    ".config/zed"
     ".config/fish"
     ".config/fish/completions"
     ".config/fish/conf.d"

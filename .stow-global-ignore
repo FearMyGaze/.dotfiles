@@ -1,3 +1,6 @@
 docker\.fish
 kubectl\.fish
 orbctl\.fish
+settings_backup\.json
+keymap_backup\.json
+.*-backup.*
