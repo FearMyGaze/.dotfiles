@@ -46,3 +46,6 @@ alias showHiddenFiles  "defaults write com.apple.finder AppleShowAllFiles YES &&
 # alias quarantine "sudo xattr -rd com.apple.quarantine"
 # alias vlc_wav "duti -s org.videolan.vlc com.microsoft.waveform-audio all"
 # alias vlc_mp3 "duti -s org.videolan.vlc public.mp3 all"
+
+
+zoxide init fish | source

@@ -135,6 +135,14 @@ function gs
 end
 
 #
+# Zoxide commands
+#
+
+alias l='zi'
+alias zz='z -'
+alias b='z ..'
+
+#
 # Config Commands
 #
 
@@ -161,10 +169,6 @@ end
 
 function adbc
     adb connect
-end
-
-function proj
-    cd ~/Documents/Github
 end
 
 #
@@ -237,4 +241,22 @@ function webm_to_mp4
             echo "File not found: $file"
         end
     end
+end
+
+function vcompress --argument input
+    if test -z "$input"
+        echo "Usage: vcompress input_file.mp4 [bitrate]"
+        return 1
+    end
+
+    # Set bitrate to 2000k if the second argument is missing
+    set -l bitrate $argv[2]
+    if test -z "$bitrate"
+        set bitrate "2000k"
+    end
+
+    # Generate output filename (filename_compressed.mp4)
+    set -l output (string replace -r '\.[^.]+$' '_compressed.mp4' $input)
+
+    ffmpeg -i $input -vcodec h264_videotoolbox -b:v $bitrate $output
 end
