@@ -8,5 +8,10 @@ SETUVAR _fisher_jorgebucaran_2F_hydro_files:\x7e/\x2econfig/fish/functions/fish_
 SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ejorgebucaran/hydro
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR _hydro_git_10244:master\uf1d2\x20
-SETUVAR _hydro_git_14198:master\uf1d2\x20
+SETUVAR _hydro_git_1078:master\uf1d2\x20
+SETUVAR _hydro_git_30463:master\uf1d2\x20
+SETUVAR _hydro_git_35262:master\uf1d2\x20
+SETUVAR _hydro_git_46764:master\uf1d2\x20
+SETUVAR _hydro_git_48516:master\uf1d2\x20
+SETUVAR _hydro_git_66033:master\uf1d2\x20
 SETUVAR fish_user_paths:/Users/giorgos/go/bin\x1e/opt/homebrew/opt/ruby/bin\x1e/Users/giorgos/Applications/Ghostty\x2eapp/Contents/MacOS

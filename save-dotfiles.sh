@@ -4,9 +4,28 @@ set -e
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 OS="$(uname -s)"
 
+detect_distro() {
+    if [[ "$OS" != "Linux" ]]; then
+        echo "$OS"
+        return
+    fi
+    
+    if [[ -f /etc/os-release ]]; then
+        . /etc/os-release
+        echo "${ID:-linux}"
+    elif [[ -f /etc/lsb-release ]]; then
+        . /etc/lsb-release
+        echo "${DISTRIB_ID:-linux}" | tr '[:upper:]' '[:lower:]'
+    else
+        echo "linux"
+    fi
+}
+
+DISTRO="$(detect_distro)"
+
 case "$OS" in
     Darwin) TARGET_DIR="macos" ;;
-    Linux)  TARGET_DIR="linux" ;;
+    Linux)  TARGET_DIR="linux-$DISTRO" ;;
     *) echo "Unknown OS: $OS"; exit 1 ;;
 esac
 
@@ -46,6 +65,7 @@ items=(
     ".config/fish/completions"
     ".config/fish/conf.d"
     ".config/fish/functions"
+    ".config/starship.toml"
 )
 
 echo ""

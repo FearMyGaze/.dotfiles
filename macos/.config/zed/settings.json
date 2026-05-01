@@ -8,7 +8,11 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
     // "vim_mode": true,
-    "icon_theme": "Catppuccin Latte",
+    "icon_theme": {
+        "mode": "dark",
+        "light": "Light Charmed Icons",
+        "dark": "Warm Charmed Icons",
+    },
     "telemetry": {
         "diagnostics": false,
         "metrics": false,
@@ -30,9 +34,9 @@
     "buffer_font_size": 11,
     "buffer_font_family": "Maple Mono NF",
     "theme": {
-        "mode": "system",
-        "light": "Gruvbox Dark Hard",
-        "dark": "Catppuccin Latte - No Italics",
+        "mode": "dark",
+        "light": "Gruvbox Light",
+        "dark": "Gruvbox Dark",
     },
     "show_wrap_guides": true,
     "preferred_line_length": 80,

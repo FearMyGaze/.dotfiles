@@ -1,8 +1,7 @@
 title = ghostty
-theme = Gruvbox Dark
-auto-update = download
-auto-update-channel = stable
+language = en
 shell-integration = fish
+
 resize-overlay-position = bottom-right
 
 #Window
@@ -22,10 +21,10 @@ window-save-state = never
 window-subtitle = working-directory
 
 #MacOs
-macos-icon = blueprint
+macos-icon = retro
 macos-icon-frame = beige
 macos-option-as-alt = false
-macos-titlebar-style = native
+macos-titlebar-style = tabs
 macos-titlebar-proxy-icon = hidden
 
 # Clipboard settings
@@ -41,6 +40,7 @@ font-thicken = false
 font-size = 12
 
 #Theme
+theme = Gruvbox Dark
 cursor-style = bar
 cursor-style-blink = false
 background-blur=true
@@ -52,3 +52,7 @@ keybind = ctrl+k=goto_split:top
 keybind = ctrl+l=goto_split:right
 keybind = cmd+n=unbind
 keybind = global:cmd+grave_accent=new_window
+
+#auto update
+auto-update = download
+auto-update-channel = stable

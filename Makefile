@@ -1,60 +1,45 @@
-.PHONY: help save deploy clean check-stow init setup list brew-save brew-install
+.PHONY: help save deploy clean check-stow init brew-save brew-install list
 
 SHELL := /bin/bash
+OS_DIR := $(shell . ./detect-os.sh >/dev/null 2>&1 && detect_os_dir)
+
+CONFIGS := .gitconfig .config/fish .config/starship.toml .config/doom .config/ghostty .config/yazi .config/zed
+BREW_FILE := $(OS_DIR)/brew/Brewfile
 
 check-stow:
-	@which stow >/dev/null 2>&1 || (echo "Stow not installed. Run: brew install stow (macOS) or apt install stow (Linux)" && exit 1)
+	@which stow >/dev/null 2>&1 || (echo "Stow not installed" && exit 1)
 
 check-brew:
 	@which brew >/dev/null 2>&1 || (echo "Homebrew not installed" && exit 1)
 
 init:
-	@mkdir -p macos linux common
-	@echo "Created: macos/ linux/ common/"
-
-setup: init check-stow
-	@echo "Setup complete. Run 'make save' to import dotfiles or 'make deploy' to symlink them."
+	@mkdir -p macos linux-* $(OS_DIR)/brew
 
 deploy: check-stow
-	@CURRENT_OS=$$(uname -s | sed 's/Darwin/macos/;s/Linux/linux/'); \
-	echo "Deploying $$CURRENT_OS dotfiles..."; \
-	if [ -d "$$CURRENT_OS" ]; then \
-		stow --adopt -v --ignore='docker\\.fish' --ignore='kubectl\\.fish' --ignore='orbctl\\.fish' -t $$HOME -d . $$CURRENT_OS; \
-	else \
-		echo "No $$CURRENT_OS directory found. Run 'make save' first."; \
-	fi
+	@[ -d "$(OS_DIR)" ] && stow --adopt -v -t $$HOME -d . $(OS_DIR) || (echo "No $(OS_DIR) dir. Run 'make save' first." && exit 1)
 
 save: check-stow
-	@./save-dotfiles.sh
+	@mkdir -p $(OS_DIR) $(CONFIGS:%.%=/%)
+	@for f in $(CONFIGS); do \
+		src="$(HOME)/$$f"; \
+		dst="$(OS_DIR)/$$f"; \
+		[ "$$f" = ".gitconfig" ] && [ -f "$$src" ] && cp "$$src" "$$dst"; \
+		[ -d "$$src" ] && mkdir -p "$$dst" && cp -r "$$src"/* "$$dst"/; \
+	done
+	@echo "Saved to $(OS_DIR)! Run 'make deploy'"
 
 brew-save: check-brew
-	@CURRENT_OS=$$(uname -s | sed 's/Darwin/macos/;s/Linux/linux/'); \
-	mkdir -p "$$CURRENT_OS/brew"; \
-	brew bundle dump --force --file="$$CURRENT_OS/brew/Brewfile"; \
-	echo "Saved Homebrew packages to $$CURRENT_OS/brew/Brewfile"
+	@mkdir -p $(OS_DIR)/brew
+	@brew bundle dump --force --file="$(BREW_FILE)"
 
 brew-install: check-brew
-	@CURRENT_OS=$$(uname -s | sed 's/Darwin/macos/;s/Linux/linux/'); \
-	if [ -f "$$CURRENT_OS/brew/Brewfile" ]; then \
-		brew bundle install --file="$$CURRENT_OS/brew/Brewfile"; \
-	else \
-		echo "No Brewfile found in $$CURRENT_OS/brew/"; \
-	fi
+	@[ -f "$(BREW_FILE)" ] && brew bundle install --file="$(BREW_FILE)" || echo "No Brewfile"
 
 list:
-	@echo "Available packages:"
-	@ls -d */ 2>/dev/null | sed 's#/##'
+	@echo "Available:"; ls -d */
 
 clean:
-	@find ~ -maxdepth 1 -type l -lname "*$(shell basename $(CURDIR))*" -delete 2>/dev/null || true
-	@echo "Removed stow symlinks"
+	@find ~ -maxdepth 1 -type l -lname "*$(OS_DIR)*" -delete 2>/dev/null || true
 
 help:
-	@echo "Dotfiles with GNU Stow"
-	@echo "======================"
-	@echo "make save         - Save current machine dotfiles to repo"
-	@echo "make deploy       - Symlink current OS dotfiles to home"
-	@echo "make brew-save    - Save Homebrew packages to Brewfile"
-	@echo "make brew-install - Install Homebrew packages from Brewfile"
-	@echo "make list         - Show available packages"
-	@echo "make clean        - Remove stow symlinks"
+	@echo "Targets: save, deploy, brew-save, brew-install, list, clean"
