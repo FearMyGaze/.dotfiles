@@ -1,8 +1,9 @@
 title = ghostty
 language = en
-shell-integration = fish
+shell-integration = zsh
 
 resize-overlay-position = bottom-right
+split-inherit-working-directory = true
 
 #Window
 window-decoration = auto
@@ -53,6 +54,6 @@ keybind = ctrl+l=goto_split:right
 keybind = cmd+n=unbind
 keybind = global:cmd+grave_accent=new_window
 
-#auto update
+#Update
 auto-update = download
 auto-update-channel = stable
