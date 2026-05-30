@@ -172,3 +172,7 @@
   (setq treemacs-recenter-distance 0.1) ;; Remove projects from the workspace when they are not vissible
   )
 
+;; lsp-mode for rust-analyzer
+(after! lsp-mode
+  (add-hook 'rust-ts-mode-hook #'lsp-deferred)
+  (setq lsp-rust-analyzer-cargo-watch-command "clippy"))

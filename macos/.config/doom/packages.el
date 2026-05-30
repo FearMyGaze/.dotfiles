@@ -58,3 +58,6 @@
 
 ;; Theme
 (package! catppuccin-theme)
+
+;; Use lsp-mode for rust-analyzer instead of eglot
+(package! lsp-mode)
