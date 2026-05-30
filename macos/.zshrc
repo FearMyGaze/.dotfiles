@@ -2,8 +2,6 @@
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-plugins=(... colored-man-pages)
-
 # Options
 setopt auto_cd
 setopt extended_glob
@@ -30,6 +28,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias '....'="cd ../../.."
 alias ver="which"
+alias man="tldr"
 
 alias buc='echo "Upgrading and cleaning packages with Brew" && brew upgrade && brew cleanup --prune=all'
 
@@ -49,8 +48,14 @@ alias ds="doom sync"
 alias du="doom upgrade"
 alias dc="zed ~/.config/doom"
 
+#Rands
 alias n="yazi"
 alias adbc="adb connect"
+
+#Opencode
+uwu() {
+    opencode "$PWD"
+}
 
 #Shell config
 alias sz="source ~/.zshrc"
