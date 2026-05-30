@@ -3,7 +3,7 @@
 SHELL := /bin/bash
 OS_DIR := $(shell . ./detect-os.sh >/dev/null 2>&1 && detect_os_dir)
 
-CONFIGS := .gitconfig .config/fish .config/starship.toml .config/doom .config/ghostty .config/yazi .config/zed
+CONFIGS := .gitconfig .zshenv .zprofile .zshrc .config/doom .config/ghostty .config/yazi .config/zed
 BREW_FILE := $(OS_DIR)/brew/Brewfile
 
 check-stow:
@@ -23,7 +23,7 @@ save: check-stow
 	@for f in $(CONFIGS); do \
 		src="$(HOME)/$$f"; \
 		dst="$(OS_DIR)/$$f"; \
-		[ "$$f" = ".gitconfig" ] && [ -f "$$src" ] && cp "$$src" "$$dst"; \
+		[ "$$f" = ".gitconfig" -o "$$f" = ".zshenv" -o "$$f" = ".zshrc" -o "$$f" = ".zprofile" ] && [ -f "$$src" ] && cp "$$src" "$$dst"; \
 		[ -d "$$src" ] && mkdir -p "$$dst" && cp -r "$$src"/* "$$dst"/; \
 	done
 	@echo "Saved to $(OS_DIR)! Run 'make deploy'"

@@ -9,7 +9,7 @@ detect_distro() {
         echo "$OS"
         return
     fi
-    
+
     if [[ -f /etc/os-release ]]; then
         . /etc/os-release
         echo "${ID:-linux}"
@@ -36,7 +36,7 @@ save_item() {
     local full_path="$HOME/$item"
     local basename="$(basename "$item")"
     local first_part="$(echo "$item" | cut -d'/' -f1)"
-    
+
     if [[ -e "$full_path" ]]; then
         if [[ "$item" == .* && $(echo "$item" | tr -cd '/' | wc -c) -eq 0 ]]; then
             cp "$full_path" "$REPO_DIR/$TARGET_DIR/$basename"
@@ -55,13 +55,15 @@ save_item() {
 
 items=(
     ".gitconfig"
+    ".zshenv"
+    ".zprofile"
+    ".zshrc"
     ".bashrc"
     ".bash_profile"
     ".config/doom"
     ".config/ghostty"
     ".config/yazi"
     ".config/zed"
-    ".config/fish"
     ".config/fish/completions"
     ".config/fish/conf.d"
     ".config/fish/functions"
