@@ -41,6 +41,7 @@ alias gd="gh dash"
 alias gpu="git push"
 alias gpl="git pull"
 alias hunk="hunk diff --mode split"
+alias api = "posting"
 
 #Emacs config
 alias emacs="emacs -nw"
