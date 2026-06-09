@@ -30,7 +30,7 @@ alias '....'="cd ../../.."
 alias ver="which"
 alias man="tldr"
 
-alias buc='echo "Upgrading and cleaning packages with Brew" && brew upgrade && brew cleanup --prune=all'
+alias buc='echo "Upgrading Homebrew packages" && brew upgrade && echo "Stating cleanup" && brew cleanup --prune=all'
 
 #Git commands
 alias lg="lazygit"
