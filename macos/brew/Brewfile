@@ -1,62 +1,121 @@
-tap "anomalyco/tap"
-tap "jesseduffield/lazygit"
-tap "modem-dev/tap"
-tap "nikitabobko/tap"
+tap "anomalyco/tap", trusted: true
+tap "jesseduffield/lazygit", trusted: true
+tap "modem-dev/tap", trusted: true
+tap "nikitabobko/tap", trusted: true
+# Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
+# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
+# Cross-platform make
 brew "cmake"
+# Select default apps for documents and URL schemes on macOS
 brew "duti"
+# GNU Emacs text editor
 brew "emacs"
+# Like neofetch, but much faster because written mostly in C
 brew "fastfetch"
+# Simple, fast and user-friendly alternative to find
 brew "fd"
+# Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# Command-line fuzzy finder written in Go
 brew "fzf"
+# GitHub command-line tool
 brew "gh"
+# Distributed revision control system
 brew "git"
+# Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Open-source build automation tool based on the Groovy and Kotlin DSL
 brew "gradle"
+# International Ispell
 brew "ispell"
+# Simple terminal UI for git commands
 brew "lazygit"
+# Generic library support script
 brew "libtool"
+# Count lines of code quickly
 brew "loc"
+# Clone of ls with colorful output, file type icons, and more
 brew "lsd"
+# Utility for managing network connections
 brew "netcat"
+# Open-source, cross-platform JavaScript runtime environment
 brew "node@20"
+# Protocol buffers (Google's data interchange format)
 brew "protobuf"
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Safe, concurrent, practical language
+brew "rust"
+# Rust toolchain installer
 brew "rustup"
+# Cross-shell prompt for astronauts
 brew "starship"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# Easiest, most secure way to use WireGuard and 2FA
 brew "tailscale", restart_service: :changed
+# Official tldr client written in Rust
 brew "tlrc"
+# Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
+# Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
+# Feature-rich command-line audio/video downloader
 brew "yt-dlp"
+# Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Fish-like fast/unobtrusive autosuggestions for zsh
 brew "zsh-autosuggestions"
+# Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
-brew "anomalyco/tap/opencode"
-brew "modem-dev/tap/hunk"
+# The AI coding agent built for the terminal.
+brew "anomalyco/tap/opencode", trusted: true
+# Desktop-inspired terminal diff viewer for agent-authored changesets
+brew "modem-dev/tap/hunk", trusted: true
+# Screen recorder
 cask "bettercapture"
+# 3D creation suite
 cask "blender"
+# Developer platform
 cask "dotnet-sdk"
+# Collaborative team software
 cask "figma"
 cask "font-maple-mono-nf"
+# 2D and 3D game engine
 cask "godot"
+# C# scripting capable version of Godot game engine
 cask "godot-mono"
+# Web browser
 cask "google-chrome"
+# System monitoring app
 cask "istat-menus"
+# Free cross-platform office suite, fresh version
 cask "libreoffice"
+# Open-source cross-platform alternative to AirDrop
 cask "localsend"
+# Syncs files between computers and MEGA Cloud drives
 cask "megasync"
+# Tool to create text-based art
 cask "monodraw"
+# Replacement for Docker Desktop
 cask "orbstack"
+# Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
+# Music streaming service
+cask "spotify"
+# Calling and messaging application focusing on security
 cask "viber"
+# Web browser with built-in email client focusing on customization and control
 cask "vivaldi"
+# Multimedia player
 cask "vlc"
+# REST, GraphQL and gRPC client
 cask "yaak"
+# Multiplayer code editor
 cask "zed"
 go "golang.org/x/tools/gopls"
 go "github.com/lasorda/protobuf-language-server"
