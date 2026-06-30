@@ -3,6 +3,7 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export HOMEBREW_NO_ENV_HINTS=1
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
 
 # Options
 setopt auto_cd
