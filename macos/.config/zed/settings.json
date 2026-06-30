@@ -8,6 +8,15 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
     // "vim_mode": true,
+    "outline_panel": {
+        "dock": "left"
+    },
+    "collaboration_panel": {
+        "dock": "left"
+    },
+    "git_panel": {
+        "dock": "left"
+    },
     "icon_theme": {
         "mode": "dark",
         "light": "Light Charmed Icons",
@@ -23,7 +32,7 @@
         //     "provider": "zed.dev",
         //     "model": "claude-3-5-sonnet-latest"
         // }
-        "dock": null,
+        "dock": "right",
         "enabled": true,
     },
     "features": {
@@ -43,6 +52,7 @@
     "soft_wrap": "preferred_line_length",
     "cursor_blink": false,
     "project_panel": {
+        "dock": "left",
         "entry_spacing": "standard",
         "show_diagnostics": "all",
         "scrollbar": { "show": "never" },
