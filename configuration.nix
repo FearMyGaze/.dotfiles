@@ -139,9 +139,7 @@ in
     description = "Γιώργος";
     shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" ];
-    packages = with pkgs; [
-      firefox
-    ];
+    packages = with pkgs; [ firefox ];
   };
 
   # --- TERMINAL & SHELLS ---
@@ -232,9 +230,13 @@ in
     mesa
     flameshot
     chromium
+    firefox-devedition
     discord
 
     nil
+
+    lazygit            # <-- Προσθήκη για το Git TUI
+    lazydocker         # <-- Προσθήκη για το Docker TUI (τύπου OrbStack)
   ];
 
   virtualisation.docker.enable = true;
