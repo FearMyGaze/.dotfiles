@@ -1,9 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  # =====================================================================
-  # --- 1. ANDROID SDK (μέσω android-nixpkgs) ---
-  # =====================================================================
+  # --- ANDROID SDK (μέσω android-nixpkgs) ---
   android-nixpkgs = pkgs.callPackage (import (builtins.fetchGit {
     url = "https://github.com/tadfisher/android-nixpkgs.git";
     ref = "main";
@@ -23,19 +21,16 @@ in
   imports =
     [ ./hardware-configuration.nix ];
 
+  # --- ΕΝΕΡΓΟΠΟΙΗΣΗ FLAKES ΚΑΙ NIX COMMAND ---
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # --- ΕΠΙΤΡΕΠΟΥΜΕ ΙΔΙΟΚΤΗΣΙΑΚΟ ΛΟΓΙΣΜΙΚΟ ---
   nixpkgs.config.allowUnfree = true;
 
-  # =====================================================================
-  # [ΚΡΑΤΗΣΕ ΕΔΩ ΤΙΣ ΔΙΚΕΣ ΣΟΥ ΡΥΘΜΙΣΕΙΣ ΓΙΑ BOOTLOADER ΚΑΙ ΗΧΟ]
-  # =====================================================================
-
-  # =====================================================================
-  # --- INTEL GRAPHICS & VULKAN (NixOS 26.xx syntax) ---
-  # =====================================================================
+  # --- INTEL GRAPHICS & VULKAN ---
   hardware.graphics = {
     enable = true;
-    enable32Bit = true; # Απαραίτητο για Steam/Wine κλπ.
+    enable32Bit = true;
     extraPackages = with pkgs; [
       intel-media-driver
       intel-vaapi-driver
@@ -44,15 +39,55 @@ in
     ];
   };
 
-  # =====================================================================
-  # --- SERVICES (Tailscale & i3 Window Manager) ---
-  # =====================================================================
-  services.tailscale.enable = true;
+  # --- ΗΧΟΣ (PipeWire) ---
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
 
+  # --- SERVICES & THINKPAD OPTIMIZATIONS ---
+  services.tailscale.enable = true;
+  services.fwupd.enable = true;
+
+  # --- FINGERPRINT SENSOR & PAM AUTHENTICATION ---
+  services.fprintd.enable = true;
+  security.pam.services.login.fprintAuth = true;
+  security.pam.services.sudo.fprintAuth = true;
+
+  # --- THINKPAD POWER MANAGEMENT (TLP) ---
+  services.power-profiles-daemon.enable = false;
+  services.tlp = {
+    enable = true;
+    settings = {
+      START_CHARGE_THRESH_BAT0 = 75;
+      STOP_CHARGE_THRESH_BAT0 = 80;
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+    };
+  };
+
+  # --- INTEL THERMAL MANAGEMENT ---
+  services.thermald.enable = true;
+
+  # --- TOUCHPAD & TRACKPOINT ---
+  services.libinput = {
+    enable = true;
+    touchpad = {
+      tapping = true;
+      naturalScrolling = true;
+    };
+  };
+
+  # --- XSERVER & i3 ---
   services.xserver = {
     enable = true;
 
-    # Ρύθμιση πληκτρολογίου
     xkb = {
       layout = "us,gr";
       options = "grp:alt_shift_toggle";
@@ -67,15 +102,12 @@ in
     };
   };
 
-  # ΠΡΟΣΟΧΗ: Στις εκδόσεις 26.xx ο Display Manager βρίσκεται εδώ
   services.displayManager.lightdm.enable = true;
 
   # --- ΕΝΕΡΓΟΠΟΙΗΣΗ ADB ---
   programs.adb.enable = true;
 
-  # =====================================================================
   # --- USER CONFIGURATION ---
-  # =====================================================================
   users.users.giorgos = {
     isNormalUser = true;
     description = "Γιώργος";
@@ -86,9 +118,7 @@ in
     ];
   };
 
-  # =====================================================================
   # --- TERMINAL & SHELLS (Zsh, Starship, Zoxide) ---
-  # =====================================================================
   programs.zsh = {
     enable = true;
     autosuggestions.enable = true;
@@ -102,37 +132,41 @@ in
     enableZshIntegration = true;
   };
 
+  # --- SHELL ALIASES ---
   environment.shellAliases = {
     ".." = "cd ..";
     "..." = "cd ../..";
-    ll = "ls -lh";
-    la = "ls -lah";
-    update = "sudo nixos-rebuild switch";
+    ll = "eza -lh --icons";
+    la = "eza -lah --icons";
+    update = "sudo nixos-rebuild switch --flake /etc/nixos/#nixos";
     clean = "sudo nix-collect-garbage -d";
     cat = "bat";
     ts = "tailscale status";
   };
 
-  # =====================================================================
   # --- ENVIRONMENT VARIABLES ---
-  # =====================================================================
   environment.sessionVariables = {
     ANDROID_HOME = "${my-android-sdk}/share/android-sdk";
     ANDROID_SDK_ROOT = "${my-android-sdk}/share/android-sdk";
   };
 
-  # =====================================================================
   # --- SYSTEM PACKAGES ---
-  # =====================================================================
   environment.systemPackages = with pkgs; [
-    # WM Utilities
+    # --- Custom Bars & SYSTEM CUSTOMIZATION ---
+    (polybar.override { i3Support = true; })
     rofi
     dmenu
+    arandr
+    feh       # Για ορισμό ταπετσαρίας (wallpaper)
+    dunst     # Για όμορφες ειδοποιήσεις συστήματος
 
     # Dev Tools
     go
     rustup
     gcc
+    gh
+    fzf
+    eza
 
     # Editors & IDEs
     zed-editor
@@ -147,8 +181,9 @@ in
     git
     vulkan-tools
     libva-utils
+    tmux
 
-    # Doom Emacs Dependencies
+    # Doom Emacs Dependencies & Utilities
     emacs
     ripgrep
     fd
@@ -156,11 +191,25 @@ in
     clang
     cmake
     libtool
+    emacsPackages.pbcopy
+    emacsPackages.vterm
+    libvterm
+    gdb
+    gnumake
+    libgcc
+    pam_u2f
+    ispell
+
+    # Multimedia & Streaming
+    kdePackages.kdenlive
+    obs-studio
+    mesa
+    flameshot
+    chromium
+    discord
   ];
 
-  # =====================================================================
   # --- SMART DOOM EMACS AUTOMATIC INSTALLATION ---
-  # =====================================================================
   system.activationScripts.ensureDoomEmacs = {
     deps = [];
     text = ''
@@ -177,8 +226,24 @@ in
     '';
   };
 
-  # =====================================================================
-  # --- STATE VERSION ---
-  # =====================================================================
+  # --- FONTS ---
+  fonts = {
+    packages = with pkgs; [
+      nerd-fonts.terminess-ttf
+      nerd-fonts.blex-mono
+      ibm-plex
+      openmoji-color
+    ];
+    fontconfig = {
+        defaultFonts = {
+          sansSerif = [ "IBM Plex Sans" ];
+          serif = [ "IBM Plex Serif" ];
+          monospace = [ "Terminess Nerd Font" ];
+          emoji = [ "OpenMoji Color" ];
+        };
+    };
+    enableDefaultFonts = true;
+  };
+
   system.stateVersion = "26.05";
 }
