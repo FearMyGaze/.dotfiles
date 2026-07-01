@@ -1,3 +1,4 @@
+# /etc/nixos/configuration.nix
 { config, pkgs, ... }:
 
 let
@@ -18,14 +19,7 @@ let
   ]);
 in
 {
-  imports =
-    [ ./hardware-configuration.nix ];
-
-  # --- ΕΝΕΡΓΟΠΟΙΗΣΗ FLAKES ΚΑΙ NIX COMMAND ---
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # --- ΕΠΙΤΡΕΠΟΥΜΕ ΙΔΙΟΚΤΗΣΙΑΚΟ ΛΟΓΙΣΜΙΚΟ ---
-  nixpkgs.config.allowUnfree = true;
+  imports = [ ./hardware-configuration.nix ];
 
   # --- INTEL GRAPHICS & VULKAN ---
   hardware.graphics = {
@@ -37,16 +31,6 @@ in
       libvdpau-va-gl
       vulkan-validation-layers
     ];
-  };
-
-  # --- ΗΧΟΣ (PipeWire) ---
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
   };
 
   # --- SERVICES & THINKPAD OPTIMIZATIONS ---
@@ -84,15 +68,50 @@ in
     };
   };
 
-  # --- XSERVER & i3 ---
+  # =========================================================================
+  # 1. BOOTLOADER (Modern & Minimal Systemd-boot)
+  # =========================================================================
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # =========================================================================
+  # 2. ΡΥΘΜΙΣΕΙΣ ΔΙΚΤΥΟΥ & ΓΛΩΣΣΑΣ (Locales)
+  # =========================================================================
+  networking.hostName = "nixos"; # Πρέπει να ταιριάζει με το όνομα στο flake
+  networking.networkmanager.enable = true;
+
+  time.timeZone = "Europe/Athens";
+
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "el_GR.UTF-8";
+    LC_IDENTIFICATION = "el_GR.UTF-8";
+    LC_MEASUREMENT = "el_GR.UTF-8";
+    LC_MONETARY = "el_GR.UTF-8";
+    LC_NAME = "el_GR.UTF-8";
+    LC_NUMERIC = "el_GR.UTF-8";
+    LC_PAPER = "el_GR.UTF-8";
+    LC_TELEPHONE = "el_GR.UTF-8";
+    LC_TIME = "el_GR.UTF-8";
+  };
+
+  # =========================================================================
+  # 3. SERVICES (Γραφικό Περιβάλλον, i3 & Ήχος)
+  # =========================================================================
   services.xserver = {
     enable = true;
 
+    # Ενεργοποίηση του LightDM Display Manager
+    displayManager.lightdm.enable = true;
+
+    # Ρύθμιση πληκτρολογίου (Εναλλαγή US / GR με Alt+Shift)
     xkb = {
       layout = "us,gr";
+      variant = "";
       options = "grp:alt_shift_toggle";
     };
 
+    # Ενεργοποίηση του i3 Window Manager (Διορθώθηκε - Αυτό έλειπε!)
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
@@ -102,12 +121,22 @@ in
     };
   };
 
-  services.displayManager.lightdm.enable = true;
+  # Ήχος μέσω Pipewire (Modern Linux Standard)
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
 
-  # --- ΕΝΕΡΓΟΠΟΙΗΣΗ ADB ---
-  programs.adb.enable = true;
+  # --- ΕΝΕΡΓΟΠΟΙΗΣΗ ADB (Σχολιασμένο, διαχειρίζεται από τα android-tools) ---
+  # programs.adb.enable = true;
 
-  # --- USER CONFIGURATION ---
+  # =========================================================================
+  # 4. ΔΙΑΧΕΙΡΙΣΗ ΧΡΗΣΤΩΝ
+  # =========================================================================
   users.users.giorgos = {
     isNormalUser = true;
     description = "Γιώργος";
@@ -150,7 +179,9 @@ in
     ANDROID_SDK_ROOT = "${my-android-sdk}/share/android-sdk";
   };
 
-  # --- SYSTEM PACKAGES ---
+  # =========================================================================
+  # 5. ΠΑΚΕΤΑ ΣΥΣΤΗΜΑΤΟΣ (Όλα σου τα προγράμματα μαζεμένα)
+  # =========================================================================
   environment.systemPackages = with pkgs; [
     # --- Custom Bars & SYSTEM CUSTOMIZATION ---
     (polybar.override { i3Support = true; })
@@ -172,6 +203,7 @@ in
     zed-editor
     android-studio
     my-android-sdk
+    android-tools
 
     # Terminal Utilities
     btop
@@ -245,5 +277,12 @@ in
     enableDefaultFonts = true;
   };
 
+  # --- ΕΝΕΡΓΟΠΟΙΗΣΗ FLAKES ΚΑΙ NIX COMMAND ---
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # --- ΕΠΙΤΡΕΠΟΥΜΕ ΙΔΙΟΚΤΗΣΙΑΚΟ ΛΟΓΙΣΜΙΚΟ ---
+  nixpkgs.config.allowUnfree = true;
+
+  # --- ΕΚΔΟΣΗ ΣΥΣΤΗΜΑΤΟΣ ---
   system.stateVersion = "26.05";
 }
