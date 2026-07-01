@@ -17,3 +17,7 @@ detect_os_dir() {
             ;;
     esac
 }
+
+is_nixos() {
+    [[ "$(uname -s)" == "Linux" && -f /etc/os-release ]] && . /etc/os-release && [[ "$ID" == "nixos" ]]
+}

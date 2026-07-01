@@ -1,4 +1,4 @@
-.PHONY: help save deploy clean check-stow init brew-save brew-install list
+.PHONY: help save deploy clean check-stow init brew-save brew-install list check-nixos nix-install
 
 SHELL := /bin/bash
 OS_DIR := $(shell . ./detect-os.sh >/dev/null 2>&1 && detect_os_dir)
@@ -35,6 +35,13 @@ brew-save: check-brew
 brew-install: check-brew
 	@[ -f "$(BREW_FILE)" ] && brew bundle install --file="$(BREW_FILE)" || echo "No Brewfile"
 
+check-nixos:
+	@. ./detect-os.sh; is_nixos || (echo "Not on NixOS" && exit 1)
+
+nix-install: check-nixos
+	@echo "Running NixOS initialization..."
+	# TODO: add nix-env / home-manager / flakes setup here
+
 list:
 	@echo "Available:"; ls -d */
 
@@ -42,4 +49,4 @@ clean:
 	@find ~ -maxdepth 1 -type l -lname "*$(OS_DIR)*" -delete 2>/dev/null || true
 
 help:
-	@echo "Targets: save, deploy, brew-save, brew-install, list, clean"
+	@echo "Targets: save, deploy, brew-save, brew-install, nix-install, list, clean"
