@@ -138,7 +138,7 @@ in
     isNormalUser = true;
     description = "Γιώργος";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" ];
     packages = with pkgs; [
       firefox
     ];
@@ -195,21 +195,19 @@ in
     eza
     ghostty
 
+    # Terminal Utilities
+    btop
+    bat
+    curl
+    git
+    vulkan-tools
+    libva-utils
+
     # Editors & IDEs
     zed-editor
     android-studio
     my-android-sdk
     android-tools
-
-    # Terminal Utilities
-    btop
-    bat
-    wget
-    curl
-    git
-    vulkan-tools
-    libva-utils
-    tmux
 
     # Doom Emacs Dependencies
     emacs
@@ -235,7 +233,11 @@ in
     flameshot
     chromium
     discord
+
+    nil
   ];
+
+  virtualisation.docker.enable = true;
 
   # --- FONTS ---
   fonts = {
