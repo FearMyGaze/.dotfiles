@@ -69,7 +69,7 @@ in
   };
 
   # =========================================================================
-  # 1. BOOTLOADER (Modern & Minimal Systemd-boot)
+  # 1. BOOTLOADER
   # =========================================================================
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -77,7 +77,7 @@ in
   # =========================================================================
   # 2. ΡΥΘΜΙΣΕΙΣ ΔΙΚΤΥΟΥ & ΓΛΩΣΣΑΣ (Locales)
   # =========================================================================
-  networking.hostName = "nixos"; # Πρέπει να ταιριάζει με το όνομα στο flake
+  networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Athens";
@@ -101,9 +101,6 @@ in
   services.xserver = {
     enable = true;
 
-    # Ενεργοποίηση του LightDM Display Manager
-    displayManager.lightdm.enable = true;
-
     # Ρύθμιση πληκτρολογίου (Εναλλαγή US / GR με Alt+Shift)
     xkb = {
       layout = "us,gr";
@@ -111,7 +108,7 @@ in
       options = "grp:alt_shift_toggle";
     };
 
-    # Ενεργοποίηση του i3 Window Manager (Διορθώθηκε - Αυτό έλειπε!)
+    # Ενεργοποίηση του i3 Window Manager
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
@@ -121,7 +118,10 @@ in
     };
   };
 
-  # Ήχος μέσω Pipewire (Modern Linux Standard)
+  # Επιστροφή στον ελαφρύ και σταθερό Ly Display Manager
+  services.displayManager.ly.enable = true;
+
+  # Ήχος μέσω Pipewire
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -130,9 +130,6 @@ in
     pulse.enable = true;
     jack.enable = true;
   };
-
-  # --- ΕΝΕΡΓΟΠΟΙΗΣΗ ADB (Σχολιασμένο, διαχειρίζεται από τα android-tools) ---
-  # programs.adb.enable = true;
 
   # =========================================================================
   # 4. ΔΙΑΧΕΙΡΙΣΗ ΧΡΗΣΤΩΝ
@@ -147,7 +144,7 @@ in
     ];
   };
 
-  # --- TERMINAL & SHELLS (Zsh, Starship, Zoxide) ---
+  # --- TERMINAL & SHELLS ---
   programs.zsh = {
     enable = true;
     autosuggestions.enable = true;
@@ -155,7 +152,6 @@ in
   };
 
   programs.starship.enable = true;
-
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
@@ -167,7 +163,7 @@ in
     "..." = "cd ../..";
     ll = "eza -lh --icons";
     la = "eza -lah --icons";
-    update = "sudo nixos-rebuild switch --flake /etc/nixos/#nixos";
+    update = "sudo nixos-rebuild switch --flake /etc/nixos/#nixos --impure";
     clean = "sudo nix-collect-garbage -d";
     cat = "bat";
     ts = "tailscale status";
@@ -180,16 +176,15 @@ in
   };
 
   # =========================================================================
-  # 5. ΠΑΚΕΤΑ ΣΥΣΤΗΜΑΤΟΣ (Όλα σου τα προγράμματα μαζεμένα)
+  # 5. ΠΑΚΕΤΑ ΣΥΣΤΗΜΑΤΟΣ
   # =========================================================================
   environment.systemPackages = with pkgs; [
-    # --- Custom Bars & SYSTEM CUSTOMIZATION ---
     (polybar.override { i3Support = true; })
     rofi
     dmenu
     arandr
-    feh       # Για ορισμό ταπετσαρίας (wallpaper)
-    dunst     # Για όμορφες ειδοποιήσεις συστήματος
+    feh
+    dunst
 
     # Dev Tools
     go
@@ -198,6 +193,7 @@ in
     gh
     fzf
     eza
+    ghostty
 
     # Editors & IDEs
     zed-editor
@@ -215,7 +211,7 @@ in
     libva-utils
     tmux
 
-    # Doom Emacs Dependencies & Utilities
+    # Doom Emacs Dependencies
     emacs
     ripgrep
     fd
@@ -232,7 +228,7 @@ in
     pam_u2f
     ispell
 
-    # Multimedia & Streaming
+    # Multimedia
     kdePackages.kdenlive
     obs-studio
     mesa
@@ -240,23 +236,6 @@ in
     chromium
     discord
   ];
-
-  # --- SMART DOOM EMACS AUTOMATIC INSTALLATION ---
-  system.activationScripts.ensureDoomEmacs = {
-    deps = [];
-    text = ''
-      EMACS_DIR="/home/giorgos/.config/emacs"
-
-      if [ ! -d "$EMACS_DIR" ]; then
-        echo "Doom Emacs not found. Installing..."
-        ${pkgs.git}/bin/git clone --depth 1 https://github.com/doomemacs/doomemacs "$EMACS_DIR"
-        "$EMACS_DIR/bin/doom" install --noninteractive
-        chown -R giorgos:users "$EMACS_DIR"
-      else
-        echo "Doom Emacs already installed. Skipping..."
-      fi
-    '';
-  };
 
   # --- FONTS ---
   fonts = {
@@ -274,15 +253,10 @@ in
           emoji = [ "OpenMoji Color" ];
         };
     };
-    enableDefaultFonts = true;
+    enableDefaultPackages = true;
   };
 
-  # --- ΕΝΕΡΓΟΠΟΙΗΣΗ FLAKES ΚΑΙ NIX COMMAND ---
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # --- ΕΠΙΤΡΕΠΟΥΜΕ ΙΔΙΟΚΤΗΣΙΑΚΟ ΛΟΓΙΣΜΙΚΟ ---
   nixpkgs.config.allowUnfree = true;
-
-  # --- ΕΚΔΟΣΗ ΣΥΣΤΗΜΑΤΟΣ ---
   system.stateVersion = "26.05";
 }
