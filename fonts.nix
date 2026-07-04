@@ -1,5 +1,27 @@
 { config, pkgs, ... }:
 
+let sarasa-gothic-nerd = pkgs.stdenv.mkDerivation rec {
+    pname = "sarasa-gothic-nerd";
+    version = "1.0.37-0";
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts/releases/download/v${version}/sarasa-fixed-sc-nerd-font.zip";
+
+      hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+    };
+
+    nativeBuildInputs = [ pkgs.unzip ];
+
+    unpackPhase = ''
+      unzip $src
+    '';
+
+    installPhase = ''
+      mkdir -p $out/share/fonts/truetype/sarasa-nerd
+      cp *.ttf $out/share/fonts/truetype/sarasa-nerd/ 2>/dev/null || cp *.ttc $out/share/fonts/truetype/sarasa-nerd/
+    '';
+  };
+in
 {
   fonts = {
     packages = with pkgs; [
@@ -8,13 +30,14 @@
       ibm-plex
       openmoji-color
       maple-mono
+      sarasa-gothic-nerd
     ];
 
     fontconfig = {
       defaultFonts = {
         sansSerif = [ "IBM Plex Sans" ];
         serif     = [ "IBM Plex Serif" ];
-        monospace = [ "Terminess Nerd Font" ];
+        monospace = [ "Sarasa Fixed SC Nerd Font" ];
         emoji     = [ "Maple Mono NF" ];
       };
     };
