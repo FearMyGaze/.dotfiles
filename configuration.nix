@@ -133,6 +133,7 @@
 
     #Language servers
     nil
+    nixd
     gopls
 
     #Browsers
