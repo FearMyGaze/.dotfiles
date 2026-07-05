@@ -10,7 +10,7 @@
     "...." = "cd ../../..";
 
     cat = "bat";
-    n = "yazi"
+    n = "yazi";
 
     ll = "eza -lh --icons";
     la = "eza -lah --icons";
