@@ -7,7 +7,7 @@ let sarasa-gothic-nerd = pkgs.stdenv.mkDerivation rec {
     src = pkgs.fetchurl {
       url = "https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts/releases/download/v${version}/sarasa-fixed-sc-nerd-font.zip";
 
-      hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+      hash = "sha256-mfLSNMY5zGcG9WYCGgCzGrColAOh0h5Msd6h2oeVCKc=";
     };
 
     nativeBuildInputs = [ pkgs.unzip ];
@@ -29,7 +29,7 @@ in
       nerd-fonts.blex-mono
       ibm-plex
       openmoji-color
-      maple-mono
+      maple-mono.NF
       sarasa-gothic-nerd
     ];
 
