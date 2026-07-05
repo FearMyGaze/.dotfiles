@@ -28,7 +28,7 @@
     ts = "tailscale status";
 
     #Nix commands
-    nix-update = "sudo nixos-rebuild switch --flake /etc/nixos/#nixos --impure"
+    nix-update = "sudo nixos-rebuild switch --flake /etc/nixos/#nixos --impure";
     nix-clean = "sudo nix-env --delete-generations old && sudo nix-store --gc";
 
     #OpenPLC Runtime Docker

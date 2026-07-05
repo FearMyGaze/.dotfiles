@@ -3,7 +3,7 @@
 {
   imports = [
       ./hardware-configuration.nix
-      ./serices.nix
+      ./services.nix
       ./aliases.nix
       ./fonts.nix
       ./open_plc.nix
@@ -121,7 +121,6 @@
     gh
     btop
     yazi
-    hunk
     lazygit
     posting
     lazydocker
