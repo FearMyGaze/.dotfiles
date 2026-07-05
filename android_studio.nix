@@ -29,8 +29,6 @@ in
     android-tools
   ];
 
-  programs.adb.enable = true;
-
   environment.sessionVariables = {
     ANDROID_HOME = "${android-sdk}/share/android-sdk";
     ANDROID_SDK_ROOT = "${android-sdk}/share/android-sdk";

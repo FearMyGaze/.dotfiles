@@ -24,7 +24,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "thinkpad_t480s";
+  networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Athens";
@@ -124,10 +124,10 @@
     lazygit
     posting
     lazydocker
+    inputs.hunk.packages.${pkgs.stdenv.hostPlatform.system}.hunk
 
     #Languages
     go
-    java
     rustup
 
     #Language servers
