@@ -6,8 +6,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     hunk = {
-          url = "github:modem-dev/hunk";
-          inputs.nixpkgs.follows = "nixpkgs";
+        url = "github:modem-dev/hunk";
+        inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
