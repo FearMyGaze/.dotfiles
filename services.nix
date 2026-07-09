@@ -3,7 +3,7 @@
 {
   virtualisation.docker.enable = true;
 
-  services.tailscale.enable = true;
+  #  services.tailscale.enable = true;
   services.fwupd.enable = true;
 
   services.fprintd.enable = true;
@@ -67,10 +67,10 @@
   };
 
   services.tailscale = {
-      enable = true;
+    enable = true;
 
-      # If you would like to use a preauthorized key, set
-      # authKeyFile = "/run/secrets/tailscale_key";
-      # Note: maximum expire time is 90 days
-    };
+    # If you would like to use a preauthorized key, set
+    # authKeyFile = "/run/secrets/tailscale_key";
+    # Note: maximum expire time is 90 days
+  };
 }
