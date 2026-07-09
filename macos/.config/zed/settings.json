@@ -8,6 +8,9 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
     // "vim_mode": true,
+    "edit_predictions": {
+        "provider": "zed"
+    },
     "outline_panel": {
         "dock": "left"
     },
@@ -34,9 +37,6 @@
         // }
         "dock": "right",
         "enabled": true,
-    },
-    "features": {
-        "edit_prediction_provider": "zed",
     },
     "ui_font_size": 12,
     "ui_font_family": "Maple Mono NF",

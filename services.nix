@@ -3,7 +3,6 @@
 {
   virtualisation.docker.enable = true;
 
-  #  services.tailscale.enable = true;
   services.fwupd.enable = true;
 
   services.fprintd.enable = true;
@@ -33,25 +32,7 @@
     };
   };
 
-  services.xserver = {
-    enable = true;
-
-    # Ρύθμιση πληκτρολογίου (Εναλλαγή US / GR με Alt+Shift)
-    xkb = {
-      layout = "us,gr";
-      variant = "";
-      options = "grp:alt_shift_toggle";
-    };
-
-    # Ενεργοποίηση του i3 Window Manager
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        i3status
-        i3lock
-      ];
-    };
-  };
+  services.xserver = { enable = true; };
 
   # Επιστροφή στον ελαφρύ και σταθερό Ly Display Manager
   services.displayManager.ly.enable = true;

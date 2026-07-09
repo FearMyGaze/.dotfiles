@@ -23,6 +23,24 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  boot = {
+    plymouth = {
+      enable = true;
+
+      # Επιλογή θέματος. Το NixOS έχει ενσωματωμένα κάποια βασικά θέματα
+      # όπως: "spinner", "breeze", "fade-in", "glow", "script"
+      theme = "script";
+    };
+    consoleLogLevel = 0;
+    initrd.verbose = false;
+    kernelParams = [ "quiet" "splash" "boot.shell_on_fail" "loglevel=3" "rd.systemd.show_status=false" "rd.udev.log_level=3" "udev.log_priority=3" ];
+  };
+
+  systemd.sleep.extraConfig = ''
+    MemorySleepMode=s2idle
+  '';
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -73,15 +91,11 @@
   };
 
   environment.systemPackages = with pkgs; [
-    #Hyprland
-    rofi-wayland
-
-
-    (polybar.override { i3Support = true; })
+    hyprpaper
 
     rofi
+    xrandr
     arandr
-    feh
     dunst
     stow
 
