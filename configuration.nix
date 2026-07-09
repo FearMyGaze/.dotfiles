@@ -91,6 +91,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    wofi
+    waybar
     hyprpaper
 
     rofi
@@ -143,9 +145,9 @@
     #TUIs
     gh
     btop
-    yazi
     lazygit
     posting
+    superfile
     lazydocker
     inputs.hunk.packages.${pkgs.stdenv.hostPlatform.system}.hunk
 
