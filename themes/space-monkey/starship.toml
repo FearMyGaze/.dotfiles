@@ -2,15 +2,15 @@
 # Based on omarchy theme colors
 
 format = """\
-[](fg:#BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts)\
+[](fg:#BD4924)\
 $os\
 $username\
-[](fg:#BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts)\
+[](fg:#BD4924)\
 $directory\
-[](fg:#DF782D"  # base0B - Success/positive accents (ok, added, confirm) // Terminal executible, size & pdf files / obsidian H2 / Fastfetch logo & hardware icons / btop middle border)\
+[](fg:#DF782D)\
 $git_branch\
 $git_status\
-[](fg:#a8a9eb"  # base0E - Secondary accent (special highlights) // Terminal image files / btop top border / fastfetch bottom icons)\
+[](fg:#a8a9eb)\
 $c\
 $rust\
 $golang\
@@ -32,55 +32,55 @@ $character\
 
 [os]
 disabled = false
-style = "bg:#BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts fg:#72696a"  # base00 - Deep background; primary canvas for terminals"
+style = "bg:#BD4924 fg:#72696a"
 
 [os.style]
-bg = "#BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts"
-fg = "#72696a"  # base00 - Deep background; primary canvas for terminals"
+bg = "#BD4924"
+fg = "#72696a"
 
 [username]
 show_always = true
-style_user = "bg:#BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts fg:#72696a"  # base00 - Deep background; primary canvas for terminals"
-style_root = "bg:#fd6883"  # base08 - Error/critical accents (alerts, destructive states) // Terminal writable / obsidian H1 / btop bottom left border / compressed files fg:#72696a"  # base00 - Deep background; primary canvas for terminals"
+style_user = "bg:#BD4924 fg:#72696a"
+style_root = "bg:#fd6883 fg:#72696a"
 format = '[$user ]($style)'
 
 [directory]
-style = "fg:#e6d9db"  # base05 - Default foreground for terminal text bg:#948a8b"  # base03 - Dim text, inactive UI, subtle borders // Obsidian icons, titles & interior borders / terminal dashes / fastfetch 3x box borders / btop cpu meter, top right border, left interior borders, processes bottom gradient, download border"
+style = "fg:#e6d9db bg:#948a8b"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
 
 [git_branch]
 symbol = " "
-style = "bg:#BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts fg:#72696a"  # base00 - Deep background; primary canvas for terminals"
-format = '[[ $symbol $branch ](bg:#BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts fg:#72696a"  # base00 - Deep background; primary canvas for terminals)]($style)'
+style = "bg:#BD4924 fg:#72696a"
+format = '[[ $symbol $branch ](bg:#BD4924 fg:#72696a)]($style)'
 
 [git_status]
-style = "fg:#DF782D"  # base0B - Success/positive accents (ok, added, confirm) // Terminal executible, size & pdf files / obsidian H2 / Fastfetch logo & hardware icons / btop middle border"
+style = "fg:#DF782D"
 
 [cmd_duration]
 format = "⏱️ $duration "
-style = "fg:#948a8b"  # base03 - Dim text, inactive UI, subtle borders // Obsidian icons, titles & interior borders / terminal dashes / fastfetch 3x box borders / btop cpu meter, top right border, left interior borders, processes bottom gradient, download border"
+style = "fg:#948a8b"
 
 [character]
-success_symbol = "[❯](#DF782D"  # base0B - Success/positive accents (ok, added, confirm) // Terminal executible, size & pdf files / obsidian H2 / Fastfetch logo & hardware icons / btop middle border)"
-error_symbol = "[❯](#fd6883"  # base08 - Error/critical accents (alerts, destructive states) // Terminal writable / obsidian H1 / btop bottom left border / compressed files)"
-vimcmd_symbol = "[❮](#BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts)"
+success_symbol = "[❯](#DF782D)"
+error_symbol = "[❯](#fd6883)"
+vimcmd_symbol = "[❮](#BD4924)"
 
 [fill]
-style = "#948a8b"  # base03 - Dim text, inactive UI, subtle borders // Obsidian icons, titles & interior borders / terminal dashes / fastfetch 3x box borders / btop cpu meter, top right border, left interior borders, processes bottom gradient, download border"
+style = "#948a8b"
 
 # Language modules
-[c]    { symbol = "C "  ; style = "fg:#BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts" }
-[rust] { symbol = " "   ; style = "fg:#DF782D"  # base0B - Success/positive accents (ok, added, confirm) // Terminal executible, size & pdf files / obsidian H2 / Fastfetch logo & hardware icons / btop middle border" }
-[golang] { symbol = "Go "; style = "fg:#BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts" }
-[nodejs] { symbol = " "  ; style = "fg:#f9cc6c"  # base0A - Warning/attention accents // Terminal readable & username / obsidian H3 / download monitor" }
-[python] { symbol = " "  ; style = "fg:#a8a9eb"  # base0E - Secondary accent (special highlights) // Terminal image files / btop top border / fastfetch bottom icons" }
-[java] { symbol = "Java "; style = "fg:#BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts" }
-[docker_context] { symbol = "  " ; style = "fg:#BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts" }
-[nix_shell] { symbol = "❄️ " ; style = "fg:#DF782D"  # base0B - Success/positive accents (ok, added, confirm) // Terminal executible, size & pdf files / obsidian H2 / Fastfetch logo & hardware icons / btop middle border" }
-[lua]  { symbol = "Lua "; style = "fg:#BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts" }
-[aws]  { symbol = "☁️ " ; style = "fg:#BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts" }
-[php]  { symbol = "PHP "; style = "fg:#a8a9eb"  # base0E - Secondary accent (special highlights) // Terminal image files / btop top border / fastfetch bottom icons" }
-[kotlin] { symbol = "Kotlin "; style = "fg:#BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts" }
-[haskell] { symbol = "λ "   ; style = "fg:#DF782D"  # base0B - Success/positive accents (ok, added, confirm) // Terminal executible, size & pdf files / obsidian H2 / Fastfetch logo & hardware icons / btop middle border" }
+[c]    { symbol = "C "  ; style = "fg:#BD4924" }
+[rust] { symbol = " "   ; style = "fg:#DF782D" }
+[golang] { symbol = "Go "; style = "fg:#BD4924" }
+[nodejs] { symbol = " "  ; style = "fg:#f9cc6c" }
+[python] { symbol = " "  ; style = "fg:#a8a9eb" }
+[java] { symbol = "Java "; style = "fg:#BD4924" }
+[docker_context] { symbol = "  " ; style = "fg:#BD4924" }
+[nix_shell] { symbol = "❄️ " ; style = "fg:#DF782D" }
+[lua]  { symbol = "Lua "; style = "fg:#BD4924" }
+[aws]  { symbol = "☁️ " ; style = "fg:#BD4924" }
+[php]  { symbol = "PHP "; style = "fg:#a8a9eb" }
+[kotlin] { symbol = "Kotlin "; style = "fg:#BD4924" }
+[haskell] { symbol = "λ "   ; style = "fg:#DF782D" }

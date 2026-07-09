@@ -1,6 +1,126 @@
-@define-color foreground {{ foreground }};
 @define-color background {{ background }};
+@define-color foreground {{ foreground }};
 @define-color accent {{ accent }};
 @define-color surface {{ color8 }};
 @define-color warning {{ color3 }};
 @define-color critical {{ color1 }};
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 13px;
+  min-height: 0;
+}
+
+#waybar {
+  background: rgba(0, 0, 0, 0);
+  color: @foreground;
+}
+
+#window {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+tooltip {
+  background: @background;
+  border: 1px solid @surface;
+  border-radius: 8px;
+}
+
+tooltip label {
+  color: @foreground;
+}
+
+#workspaces button {
+  padding: 0 5px;
+  background: transparent;
+  color: @surface;
+  border-bottom: 2px solid transparent;
+}
+
+#workspaces button.focused {
+  color: @foreground;
+  border-bottom: 2px solid @accent;
+}
+
+#workspaces button.active {
+  color: @foreground;
+  border-bottom: 2px solid @accent;
+}
+
+#workspaces button.urgent {
+  color: @critical;
+  border-bottom: 2px solid @critical;
+}
+
+#mode {
+  background: @surface;
+  border-bottom: 2px solid @accent;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd {
+  padding: 0 8px;
+  margin: 0 3px;
+}
+
+#clock {
+  font-weight: bold;
+}
+
+#battery {
+  color: @foreground;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: @accent;
+}
+
+#battery.warning:not(.charging) {
+  color: @warning;
+}
+
+#battery.critical:not(.charging) {
+  color: @critical;
+}
+
+#network.disconnected {
+  color: @critical;
+}
+
+#pulseaudio.muted {
+  color: @critical;
+}
+
+#temperature.critical {
+  color: @critical;
+}
+
+#tray {
+  padding: 0 4px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+}
