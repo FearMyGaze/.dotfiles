@@ -1,4 +1,4 @@
-local active_border_color = "rgb(DE6A41)"
+local active_border_color = "rgb({{ accent_strip }})"
 
 hl.config({
   general = {
