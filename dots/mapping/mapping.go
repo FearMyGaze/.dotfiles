@@ -42,6 +42,9 @@ var BaseDir = map[string][]Entry{
 		{ThemeFile: "autostart.conf", TargetDir: ".config/hypr"},
 		{ThemeFile: "input.conf", TargetDir: ".config/hypr"},
 	},
+	"waybar": {
+		{ThemeFile: "config.jsonc", TargetDir: ".config/waybar"},
+	},
 }
 
 // GeneratedFiles lists configs we can generate from the color palette.
