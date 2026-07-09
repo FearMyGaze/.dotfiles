@@ -34,10 +34,6 @@ $character\
 disabled = false
 style = "bg:#e65c5c fg:#262626"
 
-[os.style]
-bg = "#e65c5c"
-fg = "#262626"
-
 [username]
 show_always = true
 style_user = "bg:#e65c5c fg:#262626"

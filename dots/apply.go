@@ -388,10 +388,6 @@ $character\
 disabled = false
 style = "bg:%[1]s fg:%[8]s"
 
-[os.style]
-bg = "%[1]s"
-fg = "%[8]s"
-
 [username]
 show_always = true
 style_user = "bg:%[1]s fg:%[8]s"
