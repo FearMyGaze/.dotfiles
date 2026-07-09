@@ -425,19 +425,57 @@ vimcmd_symbol = "[❮](%[1]s)"
 style = "%[9]s"
 
 # Language modules
-[c]    { symbol = "C "  ; style = "fg:%[1]s" }
-[rust] { symbol = " "   ; style = "fg:%[2]s" }
-[golang] { symbol = "Go "; style = "fg:%[1]s" }
-[nodejs] { symbol = " "  ; style = "fg:%[4]s" }
-[python] { symbol = " "  ; style = "fg:%[5]s" }
-[java] { symbol = "Java "; style = "fg:%[1]s" }
-[docker_context] { symbol = "  " ; style = "fg:%[1]s" }
-[nix_shell] { symbol = "❄️ " ; style = "fg:%[2]s" }
-[lua]  { symbol = "Lua "; style = "fg:%[1]s" }
-[aws]  { symbol = "☁️ " ; style = "fg:%[1]s" }
-[php]  { symbol = "PHP "; style = "fg:%[5]s" }
-[kotlin] { symbol = "Kotlin "; style = "fg:%[1]s" }
-[haskell] { symbol = "λ "   ; style = "fg:%[2]s" }
+[c]
+symbol = "C "
+style = "fg:%[1]s"
+
+[rust]
+symbol = " "
+style = "fg:%[2]s"
+
+[golang]
+symbol = "Go "
+style = "fg:%[1]s"
+
+[nodejs]
+symbol = " "
+style = "fg:%[4]s"
+
+[python]
+symbol = " "
+style = "fg:%[5]s"
+
+[java]
+symbol = "Java "
+style = "fg:%[1]s"
+
+[docker_context]
+symbol = "  "
+style = "fg:%[1]s"
+
+[nix_shell]
+symbol = "❄️ "
+style = "fg:%[2]s"
+
+[lua]
+symbol = "Lua "
+style = "fg:%[1]s"
+
+[aws]
+symbol = "☁️ "
+style = "fg:%[1]s"
+
+[php]
+symbol = "PHP "
+style = "fg:%[5]s"
+
+[kotlin]
+symbol = "Kotlin "
+style = "fg:%[1]s"
+
+[haskell]
+symbol = "λ "
+style = "fg:%[2]s"
 `, p.Accent, c(2), c(1), c(3), c(5), c(4), c(7), c(0), c(8))
 }
 

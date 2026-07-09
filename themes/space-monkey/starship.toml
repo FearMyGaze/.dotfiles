@@ -71,16 +71,54 @@ vimcmd_symbol = "[❮](#BD4924)"
 style = "#948a8b"
 
 # Language modules
-[c]    { symbol = "C "  ; style = "fg:#BD4924" }
-[rust] { symbol = " "   ; style = "fg:#DF782D" }
-[golang] { symbol = "Go "; style = "fg:#BD4924" }
-[nodejs] { symbol = " "  ; style = "fg:#f9cc6c" }
-[python] { symbol = " "  ; style = "fg:#a8a9eb" }
-[java] { symbol = "Java "; style = "fg:#BD4924" }
-[docker_context] { symbol = "  " ; style = "fg:#BD4924" }
-[nix_shell] { symbol = "❄️ " ; style = "fg:#DF782D" }
-[lua]  { symbol = "Lua "; style = "fg:#BD4924" }
-[aws]  { symbol = "☁️ " ; style = "fg:#BD4924" }
-[php]  { symbol = "PHP "; style = "fg:#a8a9eb" }
-[kotlin] { symbol = "Kotlin "; style = "fg:#BD4924" }
-[haskell] { symbol = "λ "   ; style = "fg:#DF782D" }
+[c]
+symbol = "C "
+style = "fg:#BD4924"
+
+[rust]
+symbol = " "
+style = "fg:#DF782D"
+
+[golang]
+symbol = "Go "
+style = "fg:#BD4924"
+
+[nodejs]
+symbol = " "
+style = "fg:#f9cc6c"
+
+[python]
+symbol = " "
+style = "fg:#a8a9eb"
+
+[java]
+symbol = "Java "
+style = "fg:#BD4924"
+
+[docker_context]
+symbol = "  "
+style = "fg:#BD4924"
+
+[nix_shell]
+symbol = "❄️ "
+style = "fg:#DF782D"
+
+[lua]
+symbol = "Lua "
+style = "fg:#BD4924"
+
+[aws]
+symbol = "☁️ "
+style = "fg:#BD4924"
+
+[php]
+symbol = "PHP "
+style = "fg:#a8a9eb"
+
+[kotlin]
+symbol = "Kotlin "
+style = "fg:#BD4924"
+
+[haskell]
+symbol = "λ "
+style = "fg:#DF782D"
