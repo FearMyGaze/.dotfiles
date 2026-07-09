@@ -1,4 +1,4 @@
-local active_border_color = "rgb(BD4924" #DF782D # Omarchy UI accent: links, focused controls, active states // obsidian checkbox /  btop bottom left border & shortcuts)"
+local active_border_color = "rgb(BD4924)"
 
 hl.config({
   general = {

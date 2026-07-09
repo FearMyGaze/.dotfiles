@@ -203,8 +203,21 @@ func LoadPalette(path string) (ColorPalette, error) {
 		}
 
 		key := strings.TrimSpace(parts[0])
-		val := strings.TrimSpace(parts[1])
-		val = strings.Trim(val, "\"") // Remove quotes
+
+		// Extract the quoted value properly, handling TOML inline comments
+		rawVal := strings.TrimSpace(parts[1])
+		val := ""
+		if start := strings.Index(rawVal, "\""); start >= 0 {
+			// Find the closing quote
+			end := strings.Index(rawVal[start+1:], "\"")
+			if end >= 0 {
+				val = rawVal[start+1 : start+1+end]
+			} else {
+				val = strings.Trim(rawVal, "\"")
+			}
+		} else {
+			val = strings.Trim(rawVal, "\"")
+		}
 
 		switch key {
 		case "accent":
