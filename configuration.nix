@@ -67,7 +67,16 @@
     package = pkgs.jdk21;
   };
 
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
   environment.systemPackages = with pkgs; [
+    #Hyprland
+    rofi-wayland
+
+
     (polybar.override { i3Support = true; })
 
     rofi
