@@ -32,6 +32,7 @@ alias ...="cd ../.."
 alias '....'="cd ../../.."
 alias ver="which"
 alias man="tldr"
+alias wc="loc"
 
 alias buc='echo "Upgrading Homebrew packages" && brew upgrade && echo "Stating cleanup" && brew cleanup --prune=all'
 
@@ -43,6 +44,8 @@ alias gs="git status"
 alias gd="gh dash"
 alias gpu="git push"
 alias gpl="git pull"
+alias gbl="git branch -a"
+alias gbc="git switch -c"
 alias hunk="hunk diff --mode split"
 alias api="posting"
 
