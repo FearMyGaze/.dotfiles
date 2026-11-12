@@ -1,0 +1,23 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "model": "ollama/deepseek-heretic",
+    "provider": {
+        "ollama": {
+            "npm": "@ai-sdk/openai-compatible",
+            "name": "Ollama",
+            "options": {
+                "baseURL": "http://127.0.0.1:11434/v1"
+            },
+            "models": {
+                "deepseek-heretic": {
+                    "name": "DeepSeek Heretic Q4_K_M",
+                    "toolCall": true,
+                    "limit": {
+                        "context": 8192,
+                        "output": 4096
+                    }
+                }
+            }
+        }
+    }
+}
